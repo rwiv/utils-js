@@ -4,6 +4,15 @@
   "description": "",
   "type": "module",
   "main": "./dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./common": "./dist/common/index.js",
+    "./csv": "./dist/csv/index.js",
+    "./data": "./dist/data/index.js",
+    "./file": "./dist/file/index.js",
+    "./type": "./dist/type/index.js",
+    "./web": "./dist/web/index.js"
+  },
   "types": "./dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
