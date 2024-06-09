@@ -17,11 +17,13 @@ class Result {
         if (this.err !== undefined) {
             fn(this.err);
         }
+        return this;
     }
     async onFailureAsync(fn) {
         if (this.err !== undefined) {
             await fn(this.err);
         }
+        return this;
     }
 }
 export function runCatching(fn) {
@@ -29,6 +31,17 @@ export function runCatching(fn) {
     let err = undefined;
     try {
         ok = fn();
+    }
+    catch (e) {
+        err = e;
+    }
+    return new Result(ok, err);
+}
+export async function runCatchingAsync(fn) {
+    let ok = undefined;
+    let err = undefined;
+    try {
+        ok = await fn();
     }
     catch (e) {
         err = e;
