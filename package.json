@@ -4,7 +4,7 @@
   "description": "",
   "type": "module",
   "exports": {
-    "./duration/check": "./dist/common/duration_check.js",
+    "./duration_check": "./dist/common/duration_check.js",
     "./logger": "./dist/common/logger.js",
     "./result": "./dist/common/result.js",
     "./retry": "./dist/common/retry.js",
