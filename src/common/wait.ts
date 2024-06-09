@@ -1,4 +1,4 @@
-export function sleep(timeout: number) {
+export function delay(timeout: number) {
   return new Promise<void>((resolve, reject) => {
     setTimeout(() => resolve(), timeout);
   });
@@ -13,7 +13,7 @@ export async function waitForPromise(interval: number, fn: () => Promise<boolean
         throw Error("wait timeout");
       }
     }
-    await sleep(interval);
+    await delay(interval);
   }
 }
 
@@ -26,6 +26,6 @@ export async function waitFor(interval: number, fn: () => boolean, timeout: numb
         throw Error("wait timeout");
       }
     }
-    await sleep(interval);
+    await delay(interval);
   }
 }
