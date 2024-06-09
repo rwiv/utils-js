@@ -20,6 +20,7 @@
     "./null": "./dist/type/null.js",
     "./list": "./dist/type/list.js",
     "./date": "./dist/type/date.js",
+    "./string": "./dist/type/string.js",
     "./regex": "./dist/type/regex.js",
     "./fetch": "./dist/web/fetch.js",
     "./url": "./dist/web/url.js"
