@@ -1,5 +1,6 @@
 import fs from "fs/promises";
 import readline from "readline";
+import path from "path";
 export function readFile(filepath) {
     return fs.readFile(filepath, { encoding: "utf-8" });
 }
@@ -22,4 +23,14 @@ export async function readLines(input) {
         lines.push(line);
     });
     return lines;
+}
+export async function walk(dirPath, fn) {
+    const files = await fs.readdir(dirPath, { withFileTypes: true });
+    for (const file of files) {
+        await fn(file);
+        if (file.isDirectory()) {
+            const fullPath = path.resolve(dirPath, file.name);
+            await walk(fullPath, fn);
+        }
+    }
 }

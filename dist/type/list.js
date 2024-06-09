@@ -59,10 +59,3 @@ export function getFirstElem(arr, fn) {
     }
     return undefined;
 }
-function walk(list, fn) {
-    const result = [];
-    for (let i = 0; i < list.length; i++) {
-        fn(list[i], result, i);
-    }
-    return result;
-}

@@ -63,11 +63,3 @@ export function getFirstElem<T>(arr: T[], fn: (elem: T) => boolean) {
   }
   return undefined;
 }
-
-function walk<T, R>(list: T[], fn: (elem: T, result: R[], idx: number) => void): R[] {
-  const result: R[] = [];
-  for (let i = 0; i < list.length; i++) {
-    fn(list[i], result, i);
-  }
-  return result;
-}
