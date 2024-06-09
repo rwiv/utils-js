@@ -2,7 +2,7 @@ import {it} from "vitest";
 import fs from "fs-extra";
 import path from "path";
 import {assetPath} from "../file/path.js";
-import {WriteStream} from "./stream.js";
+import {WriteStream} from "./custom_stream";
 
 it("test Writable", async () => {
   const rs = fs.createReadStream(path.resolve(assetPath(), "test", "captcha", "image.jpg"));
