@@ -3,7 +3,7 @@ import path from "path";
 import fs from "fs-extra";
 import {rootPath} from "../file/path.js";
 import {changeCsvHeader, concatCsvs} from "./csv.js";
-import {concatAll} from "./csv_apply.js";
+import {concatAll} from "./apply.js";
 
 const asset = path.resolve(rootPath(), "test", "asset");
 
