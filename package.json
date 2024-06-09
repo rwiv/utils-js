@@ -17,7 +17,7 @@
     "./file": "./dist/file/file.js",
     "./path": "./dist/file/path.js",
     "./null": "./dist/type/null.js",
-    "./array": "./dist/type/array.js",
+    "./list": "./dist/type/list.js",
     "./date": "./dist/type/date.js",
     "./regex": "./dist/type/regex.js",
     "./fetch": "./dist/web/fetch.js",

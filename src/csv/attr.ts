@@ -3,20 +3,20 @@ interface RowChunks {
   headerNames: string[];
 }
 
-export function findValue(rowChunks: RowChunks, headerName: string) {
+export function findCsvValue(rowChunks: RowChunks, headerName: string) {
   const { values, headerNames } = rowChunks;
   const idx = headerNames.indexOf(headerName);
   return values[idx];
 }
 
-export function findValueBool(rowChunks: RowChunks, headerName: string) {
+export function findCsvBool(rowChunks: RowChunks, headerName: string) {
   const { values, headerNames } = rowChunks;
   const idx = headerNames.indexOf(headerName);
   const regex = /true/i;
   return values[idx].match(regex) !== null;
 }
 
-export function findValueInt(rowChunks: RowChunks, headerName: string) {
+export function findCsvInt(rowChunks: RowChunks, headerName: string) {
   const { values, headerNames } = rowChunks;
   const idx = headerNames.indexOf(headerName);
   let result: number | undefined = parseInt(values[idx]);

@@ -1,17 +1,17 @@
 import path from "path";
 import fs from "fs-extra";
-import { changeCsvHeader, concatCsvs } from "./csv.js";
-export async function concatAll(basePath, header = undefined) {
+import { updateCsvHeader, concatCsvFiles } from "./csv.js";
+export async function concatCsvFilesByBasePath(basePath, header = undefined) {
     const dirNames = await fs.readdir(basePath);
     for (const dirName of dirNames) {
         const dirPath = path.resolve(basePath, dirName);
         const fileNames = await fs.readdir(dirPath);
         const filePaths = fileNames.map(fileName => path.resolve(dirPath, fileName));
         const dest = path.resolve(basePath, dirName + ".csv");
-        await concatCsvs(dest, filePaths, header);
+        await concatCsvFiles(dest, filePaths, header);
     }
 }
-export async function changeHeaderAll(header, basePath, srcKey, destKey) {
+export async function changeAllCsvHeaders(header, basePath, srcKey, destKey) {
     const dirNames = await fs.readdir(basePath);
     for (const dirName of dirNames) {
         const dirPath = path.resolve(basePath, dirName);
@@ -22,7 +22,7 @@ export async function changeHeaderAll(header, basePath, srcKey, destKey) {
             const srcPath = filePaths[i];
             const destPath = destPaths[i];
             await fs.ensureFile(destPath);
-            await changeCsvHeader(srcPath, destPath, header);
+            await updateCsvHeader(srcPath, destPath, header);
         }
     }
 }

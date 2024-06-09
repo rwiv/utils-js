@@ -6,7 +6,7 @@ export function readFile(filepath: string) {
   return fs.readFile(filepath, { encoding: "utf-8" });
 }
 
-export function readLines(input: ReadStream, fn: (line: string, idx: number, reader: readline.Interface) => Promise<void>): Promise<void> {
+export function walkLines(input: ReadStream, fn: (line: string, idx: number, reader: readline.Interface) => Promise<void>): Promise<void> {
   return new Promise((resolve, reject) => {
     const reader = readline.createInterface({ input });
 
@@ -22,9 +22,9 @@ export function readLines(input: ReadStream, fn: (line: string, idx: number, rea
   });
 }
 
-export async function getLines(input: ReadStream) {
+export async function readLines(input: ReadStream) {
   const lines: string[] = [];
-  await readLines(input, async (line, idx, reader) => {
+  await walkLines(input, async (line, idx, reader) => {
     lines.push(line);
   });
   return lines;

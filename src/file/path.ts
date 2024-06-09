@@ -16,16 +16,12 @@ export function getExt(path: string) {
   return chunks[chunks.length - 1];
 }
 
-export function rootPath() {
+export function getRootPath() {
   return path.resolve();
 }
 
-export function assetPath() {
-  return path.resolve(rootPath(), "asset");
-}
-
 // '\/:*?"<>|' -> '＼／：＊？″＜＞｜'
-export function convertFileName(origin: string) {
+export function normalizedFilename(origin: string) {
   let result = origin;
   result = result.replace(/\\/gi, "＼");
   result = result.replace(/\//gi, "／");

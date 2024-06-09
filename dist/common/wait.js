@@ -3,7 +3,7 @@ export function delay(timeout) {
         setTimeout(() => resolve(), timeout);
     });
 }
-export async function waitForPromise(interval, fn, timeout = undefined) {
+export async function waitForAsync(interval, fn, timeout = undefined) {
     const startTime = new Date();
     while (!await fn()) {
         if (timeout !== undefined) {

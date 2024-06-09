@@ -1,4 +1,4 @@
-export function toPrettyDateString(date: Date) {
+export function toPrettyDate(date: Date) {
   let month: number | string = date.getMonth() + 1;
   let day: number | string = date.getDate();
   let hour: number | string = date.getHours();

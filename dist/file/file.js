@@ -3,7 +3,7 @@ import readline from "readline";
 export function readFile(filepath) {
     return fs.readFile(filepath, { encoding: "utf-8" });
 }
-export function readLines(input, fn) {
+export function walkLines(input, fn) {
     return new Promise((resolve, reject) => {
         const reader = readline.createInterface({ input });
         let idx = 0;
@@ -16,9 +16,9 @@ export function readLines(input, fn) {
         });
     });
 }
-export async function getLines(input) {
+export async function readLines(input) {
     const lines = [];
-    await readLines(input, async (line, idx, reader) => {
+    await walkLines(input, async (line, idx, reader) => {
         lines.push(line);
     });
     return lines;

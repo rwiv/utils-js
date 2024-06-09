@@ -1,8 +1,8 @@
 import winston from "winston";
 import chalk from "chalk";
 import path from "path";
-import { toPrettyDateString } from "../type/date.js";
-import { assetPath } from "../file/path.js";
+import { toPrettyDate } from "../type/date.js";
+import { getRootPath } from "../file/path.js";
 const logLevel = "info";
 const { combine, timestamp, printf } = winston.format;
 const logFormat = printf(({ level, message, label, timestamp }) => {
@@ -21,10 +21,10 @@ const winstonLogger = winston.createLogger({
     ]
 });
 if (process.env.NODE_ENV === "prod") {
-    const curFilename = toPrettyDateString(new Date()).replace(/:/gi, "-");
+    const curFilename = toPrettyDate(new Date()).replace(/:/gi, "-");
     const fileTransport = new winston.transports.File({
         filename: `${curFilename}.log`,
-        dirname: path.resolve(assetPath(), "logs"),
+        dirname: path.resolve(getRootPath()),
         format: winston.format.combine(winston.format.padLevels({
             levels: { error: 0, warn: 0, info: 0, debug: 0, silly: 0, }
         }), printf(({ level, message, label, timestamp }) => {

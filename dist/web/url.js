@@ -1,5 +1,4 @@
-// remove query string
-export function rmQS(url) {
+export function removeQueryString(url) {
     const chunks = url.split("?");
     return chunks[0];
 }

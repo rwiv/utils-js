@@ -4,7 +4,7 @@ export function delay(timeout: number) {
   });
 }
 
-export async function waitForPromise(interval: number, fn: () => Promise<boolean>, timeout: number | undefined = undefined) {
+export async function waitForAsync(interval: number, fn: () => Promise<boolean>, timeout: number | undefined = undefined) {
   const startTime = new Date();
   while (!await fn()) {
     if (timeout !== undefined) {

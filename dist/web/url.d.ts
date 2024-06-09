@@ -1,1 +1,1 @@
-export declare function rmQS(url: string): string;
+export declare function removeQueryString(url: string): string;

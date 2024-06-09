@@ -1,11 +1,11 @@
 import {it} from "vitest";
 import path from "path";
 import fs from "fs-extra";
-import {rootPath} from "./path.js";
-import {getLines} from "./file.js";
+import {getRootPath} from "./path.js";
+import {readLines} from "./file.js";
 
 it("test getLines", async () => {
-  const rs = fs.createReadStream(path.resolve(rootPath(), "conf", "list.example.txt"));
-  const lines = await getLines(rs);
+  const rs = fs.createReadStream(path.resolve(getRootPath(), "conf", "list.example.txt"));
+  const lines = await readLines(rs);
   console.log(lines);
 });

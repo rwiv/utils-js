@@ -1,4 +1,4 @@
-export function subArrays(origin, n) {
+export function subLists(origin, n) {
     const copy = [...origin];
     const result = [];
     while (copy.length !== 0) {
@@ -13,7 +13,7 @@ export function subArrays(origin, n) {
     }
     return result;
 }
-export function subArraysWithIdx(origin, n) {
+export function subListsWithIdx(origin, n) {
     const copy = [...origin];
     const result = [];
     let cnt = 0;
@@ -30,15 +30,15 @@ export function subArraysWithIdx(origin, n) {
     }
     return result;
 }
-export function toMap(arr, getKey) {
+export function toMap(arr, getKeyFn) {
     const result = new Map();
     for (let i = 0; i < arr.length; i++) {
-        const key = getKey(arr[i], i, arr);
+        const key = getKeyFn(arr[i], i, arr);
         result.set(key, arr[i]);
     }
     return result;
 }
-export function toArrayMap(arr, getKey) {
+export function toListMap(arr, getKey) {
     const result = new Map();
     for (let i = 0; i < arr.length; i++) {
         const key = getKey(arr[i], i, arr);
@@ -51,7 +51,7 @@ export function toArrayMap(arr, getKey) {
     }
     return result;
 }
-export function first(arr, fn) {
+export function getFirstElem(arr, fn) {
     for (const elem of arr) {
         if (fn(elem)) {
             return elem;
@@ -59,7 +59,7 @@ export function first(arr, fn) {
     }
     return undefined;
 }
-function traversal(list, fn) {
+function walk(list, fn) {
     const result = [];
     for (let i = 0; i < list.length; i++) {
         fn(list[i], result, i);

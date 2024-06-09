@@ -1,5 +1,5 @@
 import {it} from "vitest";
-import {toArrayMap} from "./array.js";
+import {toListMap} from "./list.js";
 
 it("test arrayMap", () => {
   const arr = [
@@ -7,7 +7,7 @@ it("test arrayMap", () => {
     {a: "1", b: "10"},
     {a: "2", b: "30"},
   ]
-  const map = toArrayMap(arr, it => it.a);
+  const map = toListMap(arr, it => it.a);
   console.log(map);
 
   const subArr = map.get("1");

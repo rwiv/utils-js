@@ -1,7 +1,7 @@
 import fs from "fs-extra";
-import {readLines} from "../file/file.js";
+import {walkLines} from "../file/file.js";
 
-export async function createCsv(path: string, header: string) {
+export async function writeCsv(path: string, header: string) {
   await fs.writeFile(path, header);
 }
 
@@ -9,16 +9,16 @@ export async function writeOneLine(path: string, data: string) {
   await fs.appendFile(path, data);
 }
 
-export async function changeCsvHeader(src: string, dest: string, header: string) {
+export async function updateCsvHeader(src: string, dest: string, header: string) {
   const h = header[header.length - 1] === "\n" ? header : header + "\n";
   await fs.writeFile(dest, h);
-  await readLines(fs.createReadStream(src), async (line, idx) => {
+  await walkLines(fs.createReadStream(src), async (line, idx) => {
     if (idx === 0) return;
     await fs.appendFile(dest, line + "\n");
   });
 }
 
-export async function concatCsvs(dest: string, csvPaths: string[], header: string | undefined = undefined) {
+export async function concatCsvFiles(dest: string, csvPaths: string[], header: string | undefined = undefined) {
   let head: string | undefined = header;
   if (header === undefined) {
     head = await getCsvHeader(fs.createReadStream(csvPaths[0]));
@@ -32,7 +32,7 @@ export async function concatCsvs(dest: string, csvPaths: string[], header: strin
 
   for (const csvPath of csvPaths) {
     const rs = fs.createReadStream(csvPath);
-    await readLines(rs, async (line, idx) => {
+    await walkLines(rs, async (line, idx) => {
       if (idx === 0) return;
       if (line === "") return;
       await fs.appendFile(dest, line + "\n");
@@ -42,7 +42,7 @@ export async function concatCsvs(dest: string, csvPaths: string[], header: strin
 
 export async function getCsvHeader(rs: fs.ReadStream): Promise<string> {
   let result = "";
-  await readLines(rs, async (line, idx, reader) => {
+  await walkLines(rs, async (line, idx, reader) => {
     if (idx === 0) {
       result = line;
       reader.close();

@@ -3,5 +3,5 @@
 import readline from "readline";
 import { ReadStream } from "node:fs";
 export declare function readFile(filepath: string): Promise<string>;
-export declare function readLines(input: ReadStream, fn: (line: string, idx: number, reader: readline.Interface) => Promise<void>): Promise<void>;
-export declare function getLines(input: ReadStream): Promise<string[]>;
+export declare function walkLines(input: ReadStream, fn: (line: string, idx: number, reader: readline.Interface) => Promise<void>): Promise<void>;
+export declare function readLines(input: ReadStream): Promise<string[]>;

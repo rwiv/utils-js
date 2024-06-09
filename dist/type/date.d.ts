@@ -1,1 +1,1 @@
-export declare function toPrettyDateString(date: Date): string;
+export declare function toPrettyDate(date: Date): string;

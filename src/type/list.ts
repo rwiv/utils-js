@@ -1,4 +1,4 @@
-export function subArrays<T>(origin: T[], n: number) {
+export function subLists<T>(origin: T[], n: number) {
   const copy = [...origin];
   const result: T[][] = [];
   while (copy.length !== 0) {
@@ -15,7 +15,7 @@ export function subArrays<T>(origin: T[], n: number) {
 
 export type IdxElem<T> = {idx: number, value: T};
 
-export function subArraysWithIdx<T>(origin: T[], n: number) {
+export function subListsWithIdx<T>(origin: T[], n: number) {
   const copy = [...origin];
   const result: IdxElem<T>[][] = [];
   let cnt = 0;
@@ -32,16 +32,16 @@ export function subArraysWithIdx<T>(origin: T[], n: number) {
   return result;
 }
 
-export function toMap<T>(arr: T[], getKey: (elem: T, idx: number, elems: T[]) => string) {
+export function toMap<T>(arr: T[], getKeyFn: (elem: T, idx: number, elems: T[]) => string) {
   const result = new Map<string, T>();
   for (let i = 0; i < arr.length; i++) {
-    const key = getKey(arr[i], i, arr);
+    const key = getKeyFn(arr[i], i, arr);
     result.set(key, arr[i]);
   }
   return result;
 }
 
-export function toArrayMap<T>(arr: T[], getKey: (elem: T, idx: number, elems: T[]) => string) {
+export function toListMap<T>(arr: T[], getKey: (elem: T, idx: number, elems: T[]) => string) {
   const result = new Map<string, T[]>();
   for (let i = 0; i < arr.length; i++) {
     const key = getKey(arr[i], i, arr);
@@ -55,7 +55,7 @@ export function toArrayMap<T>(arr: T[], getKey: (elem: T, idx: number, elems: T[
   return result;
 }
 
-export function first<T>(arr: T[], fn: (elem: T) => boolean) {
+export function getFirstElem<T>(arr: T[], fn: (elem: T) => boolean) {
   for (const elem of arr) {
     if (fn(elem)) {
       return elem;
@@ -64,7 +64,7 @@ export function first<T>(arr: T[], fn: (elem: T) => boolean) {
   return undefined;
 }
 
-function traversal<T, R>(list: T[], fn: (elem: T, result: R[], idx: number) => void): R[] {
+function walk<T, R>(list: T[], fn: (elem: T, result: R[], idx: number) => void): R[] {
   const result: R[] = [];
   for (let i = 0; i < list.length; i++) {
     fn(list[i], result, i);

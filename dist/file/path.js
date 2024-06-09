@@ -12,14 +12,11 @@ export function getExt(path) {
     const chunks = getFilename(path).split(".");
     return chunks[chunks.length - 1];
 }
-export function rootPath() {
+export function getRootPath() {
     return path.resolve();
 }
-export function assetPath() {
-    return path.resolve(rootPath(), "asset");
-}
 // '\/:*?"<>|' -> '＼／：＊？″＜＞｜'
-export function convertFileName(origin) {
+export function normalizedFilename(origin) {
     let result = origin;
     result = result.replace(/\\/gi, "＼");
     result = result.replace(/\//gi, "／");
