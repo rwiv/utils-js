@@ -24,3 +24,11 @@ export function concatStringNotDuplicated(a, b, sep) {
     }
     return prefix + mid + b;
 }
+export function mergeIntersectedStrings(str1, str2) {
+    for (let i = 0; i < str1.length; i++) {
+        if (str2.startsWith(str1.substring(i))) {
+            return str1.substring(0, i) + str2;
+        }
+    }
+    return str1 + str2;
+}
