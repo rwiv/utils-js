@@ -1,4 +1,3 @@
-import { logger } from "./logger.js";
 export class RetryStopException extends Error {
     constructor(msg, cause = undefined) {
         super(msg, { cause });
@@ -73,7 +72,7 @@ function retryTemplate(fn, opt, fail) {
     for (let i = opt?.firstSkip ? 1 : 0; i < opt.limit + 1; i++) {
         try {
             if (i > 0) {
-                logger.warn(`start retry ${i}${getCtxMsg(opt.msg)}`);
+                console.log(`start retry ${i}${getCtxMsg(opt.msg)}`);
             }
             return fn(i);
         }
@@ -89,7 +88,7 @@ function retryTemplate(fn, opt, fail) {
             }
         }
     }
-    logger.warn("retry failure!");
+    console.log("retry failure!");
     return fail(err);
 }
 async function retryTemplateAsync(fn, opt, fail) {
@@ -100,7 +99,7 @@ async function retryTemplateAsync(fn, opt, fail) {
     for (let i = opt?.firstSkip ? 1 : 0; i < opt.limit + 1; i++) {
         try {
             if (i > 0) {
-                logger.warn(`start retry ${i}${getCtxMsg(opt.msg)}`);
+                console.log(`start retry ${i}${getCtxMsg(opt.msg)}`);
             }
             return await fn(i);
         }
@@ -119,7 +118,7 @@ async function retryTemplateAsync(fn, opt, fail) {
             }
         }
     }
-    logger.warn("retry failure!");
+    console.log("retry failure!");
     let result = fail(err);
     if (result instanceof Promise) {
         result = await result;

@@ -1,5 +1,3 @@
-import {logger} from "./logger.js";
-
 interface RetryOption {
   limit: number;
   delay?: number;
@@ -106,7 +104,7 @@ function retryTemplate<T, F>(
   for (let i = opt?.firstSkip ? 1 : 0; i < opt.limit + 1; i++) {
     try {
       if (i > 0) {
-        logger.warn(`start retry ${i}${getCtxMsg(opt.msg)}`);
+        console.log(`start retry ${i}${getCtxMsg(opt.msg)}`);
       }
       return fn(i);
     } catch (e) {
@@ -120,7 +118,7 @@ function retryTemplate<T, F>(
       }
     }
   }
-  logger.warn("retry failure!");
+  console.log("retry failure!");
   return fail(err);
 }
 
@@ -136,7 +134,7 @@ async function retryTemplateAsync<T, F>(
   for (let i = opt?.firstSkip ? 1 : 0; i < opt.limit + 1; i++) {
     try {
       if (i > 0) {
-        logger.warn(`start retry ${i}${getCtxMsg(opt.msg)}`);
+        console.log(`start retry ${i}${getCtxMsg(opt.msg)}`);
       }
       return await fn(i);
     } catch (e) {
@@ -153,7 +151,7 @@ async function retryTemplateAsync<T, F>(
       }
     }
   }
-  logger.warn("retry failure!");
+  console.log("retry failure!");
   let result = fail(err);
   if (result instanceof Promise) {
     result = await result;
