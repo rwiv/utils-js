@@ -33,11 +33,7 @@ export function getRootPath() {
 export function isAbsPath(path: string) {
   if (path[0] === "/") {
     return true;
-  } else if (path.includes(":")) {
-    return true;
-  } else {
-    return false;
-  }
+  } else return path.includes(":");
 }
 
 // '\/:*?"<>|' -> '＼／：＊？″＜＞｜'

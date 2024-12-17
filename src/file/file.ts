@@ -9,6 +9,18 @@ export function readFile(filepath: string) {
   return fs.readFile(filepath, { encoding: "utf-8" });
 }
 
+export async function ensureDir(dirPath: string): Promise<void> {
+  try {
+    await fs.access(dirPath);
+  } catch (err: any) {
+    if (err.code === "ENOENT") {
+      await fs.mkdir(dirPath, { recursive: true });
+    } else {
+      throw err;
+    }
+  }
+}
+
 export function walkLines(input: ReadStream, fn: (line: string, idx: number, reader: readline.Interface) => Promise<void>): Promise<void> {
   return new Promise((resolve, reject) => {
     const reader = readline.createInterface({ input });

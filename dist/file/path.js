@@ -29,12 +29,8 @@ export function isAbsPath(path) {
     if (path[0] === "/") {
         return true;
     }
-    else if (path.includes(":")) {
-        return true;
-    }
-    else {
-        return false;
-    }
+    else
+        return path.includes(":");
 }
 // '\/:*?"<>|' -> '＼／：＊？″＜＞｜'
 export function normalizedFilename(origin) {

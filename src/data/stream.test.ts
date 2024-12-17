@@ -1,11 +1,11 @@
 import {it} from "vitest";
-import fs from "fs-extra";
+import fs from "fs";
 import path from "path";
-import {assetPath} from "../file/path.js";
-import {WriteStream} from "./custom_stream";
+import {getRootPath} from "../file/path.js";
+import {WriteStream} from "./custom_stream.js";
 
 it("test Writable", async () => {
-  const rs = fs.createReadStream(path.resolve(assetPath(), "test", "captcha", "image.jpg"));
+  const rs = fs.createReadStream(path.resolve(getRootPath(), "test", "captcha", "image.jpg"));
   const ws = WriteStream.from((chunk, encoding) => {
     console.log(chunk.length);
     console.log(encoding);

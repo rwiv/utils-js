@@ -5,6 +5,19 @@ import { getDirPath, getFilename, isAbsPath } from "./path.js";
 export function readFile(filepath) {
     return fs.readFile(filepath, { encoding: "utf-8" });
 }
+export async function ensureDir(dirPath) {
+    try {
+        await fs.access(dirPath);
+    }
+    catch (err) {
+        if (err.code === "ENOENT") {
+            await fs.mkdir(dirPath, { recursive: true });
+        }
+        else {
+            throw err;
+        }
+    }
+}
 export function walkLines(input, fn) {
     return new Promise((resolve, reject) => {
         const reader = readline.createInterface({ input });

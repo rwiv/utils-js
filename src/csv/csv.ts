@@ -1,20 +1,21 @@
-import fs from "fs-extra";
+import fs from "fs";
+import fsp from "fs/promises";
 import {walkLines} from "../file/file.js";
 
 export async function writeCsv(path: string, header: string) {
-  await fs.writeFile(path, header);
+  await fsp.writeFile(path, header);
 }
 
 export async function writeOneLine(path: string, data: string) {
-  await fs.appendFile(path, data);
+  await fsp.appendFile(path, data);
 }
 
 export async function updateCsvHeader(src: string, dest: string, header: string) {
   const h = header[header.length - 1] === "\n" ? header : header + "\n";
-  await fs.writeFile(dest, h);
+  await fsp.writeFile(dest, h);
   await walkLines(fs.createReadStream(src), async (line, idx) => {
     if (idx === 0) return;
-    await fs.appendFile(dest, line + "\n");
+    await fsp.appendFile(dest, line + "\n");
   });
 }
 
@@ -28,14 +29,14 @@ export async function concatCsvFiles(dest: string, csvPaths: string[], header: s
   }
   head = head[head.length - 1] === "\n" ? head : head + "\n";
 
-  await fs.appendFile(dest, head);
+  await fsp.appendFile(dest, head);
 
   for (const csvPath of csvPaths) {
     const rs = fs.createReadStream(csvPath);
     await walkLines(rs, async (line, idx) => {
       if (idx === 0) return;
       if (line === "") return;
-      await fs.appendFile(dest, line + "\n");
+      await fsp.appendFile(dest, line + "\n");
     });
   }
 }
