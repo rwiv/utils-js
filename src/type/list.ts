@@ -1,34 +1,50 @@
-export function subLists<T>(origin: T[], n: number) {
-  const copy = [...origin];
-  const result: T[][] = [];
-  while (copy.length !== 0) {
-    const sub: T[] = [];
-    for (let i = 0; i < n; i++) {
-      const elem = copy.shift();
-      if (elem === undefined) break;
-      sub.push(elem);
-    }
-    result.push(sub);
+export function subLists<T>(list: T[], n: number): T[][] {
+  if (n <= 0) {
+    throw new Error("n should be greater than 0");
   }
+
+  const result: T[][] = [];
+  let current: T[] = [];
+
+  for (const elem of list) {
+    if (current.length >= n) {
+      result.push(current);
+      current = [];
+    }
+    current.push(elem);
+  }
+
+  if (current.length > 0) {
+    result.push(current);
+  }
+
   return result;
 }
 
 export type IdxElem<T> = {idx: number, value: T};
 
-export function subListsWithIdx<T>(origin: T[], n: number) {
-  const copy = [...origin];
-  const result: IdxElem<T>[][] = [];
-  let cnt = 0;
-  while (copy.length !== 0) {
-    const sub: IdxElem<T>[] = [];
-    for (let i = 0; i < n; i++) {
-      const elem = copy.shift();
-      if (elem === undefined) break;
-      sub.push({ idx: cnt, value: elem });
-      cnt++;
-    }
-    result.push(sub);
+export function subListsWithIdx<T>(list: T[], n: number): IdxElem<T>[][] {
+  if (n <= 0) {
+    throw new Error("n should be greater than 0");
   }
+
+  const result: IdxElem<T>[][] = [];
+  let current: IdxElem<T>[] = [];
+
+  let cnt = 0;
+  for (const elem of list) {
+    if (current.length >= n) {
+      result.push(current);
+      current = [];
+    }
+    current.push({ idx: cnt, value: elem });
+    cnt++;
+  }
+
+  if (current.length > 0) {
+    result.push(current);
+  }
+
   return result;
 }
 

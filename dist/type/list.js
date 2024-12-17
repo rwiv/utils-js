@@ -1,32 +1,38 @@
-export function subLists(origin, n) {
-    const copy = [...origin];
+export function subLists(list, n) {
+    if (n <= 0) {
+        throw new Error("n should be greater than 0");
+    }
     const result = [];
-    while (copy.length !== 0) {
-        const sub = [];
-        for (let i = 0; i < n; i++) {
-            const elem = copy.shift();
-            if (elem === undefined)
-                break;
-            sub.push(elem);
+    let current = [];
+    for (const elem of list) {
+        if (current.length >= n) {
+            result.push(current);
+            current = [];
         }
-        result.push(sub);
+        current.push(elem);
+    }
+    if (current.length > 0) {
+        result.push(current);
     }
     return result;
 }
-export function subListsWithIdx(origin, n) {
-    const copy = [...origin];
+export function subListsWithIdx(list, n) {
+    if (n <= 0) {
+        throw new Error("n should be greater than 0");
+    }
     const result = [];
+    let current = [];
     let cnt = 0;
-    while (copy.length !== 0) {
-        const sub = [];
-        for (let i = 0; i < n; i++) {
-            const elem = copy.shift();
-            if (elem === undefined)
-                break;
-            sub.push({ idx: cnt, value: elem });
-            cnt++;
+    for (const elem of list) {
+        if (current.length >= n) {
+            result.push(current);
+            current = [];
         }
-        result.push(sub);
+        current.push({ idx: cnt, value: elem });
+        cnt++;
+    }
+    if (current.length > 0) {
+        result.push(current);
     }
     return result;
 }

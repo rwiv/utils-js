@@ -1,5 +1,11 @@
 import {it} from "vitest";
-import {toListMap} from "./list.js";
+import {subListsWithIdx, toListMap} from "./list.js";
+
+it("test subListsWithIdx", () => {
+  const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const result = subListsWithIdx(arr, 3);
+  console.log(result);
+});
 
 it("test arrayMap", () => {
   const arr = [
